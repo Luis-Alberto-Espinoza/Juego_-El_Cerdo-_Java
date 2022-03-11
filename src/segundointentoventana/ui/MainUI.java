@@ -24,9 +24,9 @@ public class MainUI {
 
     public Object[][] matrizCargadaBots() {
         Object[][] matrizBots = {
-                {1, "Na", 2, 3},
-                {5, "lu", 6, 7},
-                {12, "Ma", 11, 14}
+                {1, "Natalia", 2, 3},
+                {5, "luis", 6, 7},
+                {12, "Malena", 11, 14}
         };
         return matrizBots;
     }
@@ -34,9 +34,9 @@ public class MainUI {
     public void llenarMatriz(ArrayList<Jugador> jugador) {
         /*video111*/
         ArrayList<String> escritores = new ArrayList<>();
-        escritores.add("jn");
-        escritores.add("oz");
-        escritores.add("as");
+        escritores.add("john");
+        escritores.add("ortiz");
+        escritores.add("ordoñes");
 
         for (String luis :
                 escritores) {
@@ -65,6 +65,101 @@ public class MainUI {
         }
         System.out.println("");
 
+//        Object[][] natalia = {
+//                {"malena", "te quiero", "mucho", "toda la vida"},
+//                {"malena", "te quiero", "mucho", "toda la vida"},
+//                {"malena", "te quiero", "mucho", "toda la vida"},
+//
+//        };
+//        for (Object i :
+//                natalia) {
+//            System.out.println(i.toString() + " i");
+//        }
+//        System.out.println("");
+//        for (int i = 0; i < escritoresString.length ; i++) {
+//            for (int j = 0; j < 4; j++) {
+//               // System.out.println(escritoresString[i][j] + " doble for a un Object");
+//
+//            }
+//
+//        }
+
+//
+//        Object[][] tablaCompleta = new Object[jugador.size()][];
+//        System.out.println("llegue");
+//        for (int i = 1; i < jugador.size(); i++) {
+//            for (int j = 0; j < 3; j++) {
+//
+////                tablaCompleta[i][j] = new String[]{jugador.get(i).getNombre()};
+//////            tablaCompleta[i[j] = new Sorti[]{jugador.get(i).getId()};
+////                tablaCompleta[i][j] = new String[]{String.valueOf(jugador.get(i).getTurno())};
+////                tablaCompleta[i][j] = new String[]{String.valueOf(jugador.get(i).getResultado())};
+//
+//
+//            }
+//        }
+
+//
+//        for (int i = 0; i < tablaCompleta.length; i++) {
+//            for (int j = 0; j < 4; j++) {
+//
+//            System.out.println(tablaCompleta[i][j]);
+//            }
+//        }
+//
+//        for (Object luis :
+//        natalia) {
+//            System.out.println(luis..toString() + "  escritoresString");
+//        }
+//        System.out.println("");
+
+
+        /*fin prueba jugadores*/
+
+//
+//        System.out.println("esto es de el metodo llenar matriz = tamaño "+jugador.size());
+//        Object[] tablaCompleta =new Object [jugador.size()];
+//        tablaCompleta  = jugador.stream().toArray(Jugador[]::new);
+        // tablaCompleta  = jugador.toArray(tablaCompleta);
+        /**/
+
+        // String[] res = (String[]) jugador.toArray( new String[0]);
+        // System.out.println(Arrays.stream(res).iterator()+" ----<<<<<");
+        //jugador.toArray(res);
+        /**/
+
+//        for (int i = 0; i < res.length; i++) {
+//            System.out.println(jugador.get(i).getNombre()+jugador.get(i).getResultado() +" <==");
+////            System.out.println(String.valueOf(res[i])+" <==");
+//        }
+
+//        for (Jugador luis :
+//                jugador) {
+//            System.out.println(luis);
+//        }
+
+//        System.out.println(jugador.size() + "  ===== <<<===");
+
+//        for (int i = 0; i < jugador.size(); i++) {
+////        System.out.println("==> 0 viene de el for " + String.valueOf(jugador.get(i).getTurno()));
+//             tablaCompleta [i][]  {
+//                    {String.valueOf(jugador.get(i).getTurno()),
+//                            jugador.get(i).getNombre(),
+//                            String.valueOf(jugador.get(i).getParcial()),
+//                            String.valueOf(jugador.get(i).getResultado())}};
+//        }
+//            System.out.println(tablaCompleta[0][0]);
+//            System.out.println(tablaCompleta[1][0]);
+//            System.out.println(tablaCompleta[2][0]);
+//            System.out.println(tablaCompleta[3][0]);
+
+//        tablaCompleta[i][2] = String.valueOf(jugador.get(i).getParcial());
+//        tablaCompleta[i][3] = String.valueOf(jugador.get(i).getResultado());
+//        System.out.println("==> 1 viene de el for " + tablaCompleta[i][1]);
+//        System.out.println("==> 2 viene de el for " + tablaCompleta[i][2]);
+//        System.out.println("==> 3 viene de el for " + tablaCompleta[i][3]);
+//        createTable(tablaCompleta);
+//        }
     }
 
 
@@ -73,11 +168,19 @@ public class MainUI {
 //    public void createTable() {
 
         Object[][] natalia = {
+
                 {}
+
+//                {"malena", "te quiero", "mucho", "toda la vida"},
+//                {"malena", "te quiero", "mucho", "toda la vida"},
+//                {"malena", "te quiero", "mucho", "toda la vida"},
+
         };
         showTable.setModel(new DefaultTableModel(
-
+//              matrizLlena,
+                //          matrizCargadaBots,
                 natalia,
+                // null,
                 new String[]{"Turno", "Nombre", "Puntaje Parcial", "Puntaje Total"}
         ));
 
