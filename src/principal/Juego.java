@@ -51,9 +51,14 @@ public class Juego {
         String getTurno = "getTurno()";
         jugadoresParticipantes.sort(Comparadores.ordenarXturno); //De mayor a menor; de acuerdo al número que sacó en el dado
         listaOrdenadaParticipantes = servicio.ordenarConsecutivosTurnos(jugadoresParticipantes);//Se setea el valor del turno correspondiente en el juego
-//        stringListaordenada = servicio.listaStringParticipantes(listaOrdenadaParticipantes); //Se guarda en un estring todos los datos en formato tabla
-//        System.out.println(stringListaordenada+"presta atencion");/*------------------------------------<<<<<<<<<<<<<<<<<<*/
-        //  mainUI.llenarMatriz(listaOrdenadaParticipantes);
+
+        /*
+        stringListaordenada = servicio.listaStringParticipantes(listaOrdenadaParticipantes); //Se guarda en un estring todos los datos en formato tabla
+        System.out.println(stringListaordenada+ "-----lo de lista ordenada-----");
+
+         */
+
+
 
         //servicio.vMostrar("La lista ordenada por turnos queda de la siguiente manera\n" + stringListaordenada);
         servicio.vMostrar(servicio.listaStringParticipantes(listaOrdenadaParticipantes), "lista Ordenada por Turnos");
@@ -133,7 +138,7 @@ public class Juego {
                         total = listaOrdenadaParticipantes.get(i).getResultado();
                         System.out.println("parcial--> " + nuevoParcial + " TOTAL--> " + total);
 
-                        /*muestra el cartel de: el turno, el nombre en mayusculas, y lo que devuelve la rirada de dados */
+                        /*muestra el cartel de: el turno, el nombre en mayusculas, y lo que devuelve la tirada de dados */
                         servicio.vMostrar(listaOrdenadaParticipantes.get(i).getTurno() + " == " + listaOrdenadaParticipantes.get(i).getNombre().toUpperCase()
                                 + " \nEl número del dado es => " + jugada, "Tiradad de Dados");
 

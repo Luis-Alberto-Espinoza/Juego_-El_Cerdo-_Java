@@ -160,12 +160,8 @@ public class MainUI {
 //        System.out.println("==> 3 viene de el for " + tablaCompleta[i][3]);
 //        createTable(tablaCompleta);
 //        }
-        System.out.println("hola mundo");
-        System.out.println("hola mundo");
-        System.out.println("hola mundo");
-        System.out.println("hola mundo");
+
     }
-////////////////// esto es nuevo
 
 
     //    public void createTable(ArrayList<Jugador> lista) {
