@@ -6,6 +6,8 @@ public class Main {
 //			System.out.printf("Jugador #%d: ", (i+1));
         Juego juego = new Juego();
         Servicio servicio = new Servicio();
+        juego.pedidoDeDatos();
         juego.inicioJuego();
+        juego.partida();
     }
 }

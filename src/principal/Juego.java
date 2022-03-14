@@ -9,32 +9,39 @@ import java.util.ArrayList;
 public class Juego {
     boolean hayGanador = false;
     Servicio servicio = new Servicio();
-
+    static int puntajeFinal;
+    static  ArrayList<Jugador> jugadoresParticipantes;
     Comparadores comparadores = new Comparadores();
-
-
-    int dado;
-    int turno;
-    int cant = 2;
-
     /**/
     MainUI mainUI = new MainUI();
     /**/
+
+
+/*
+    int dado;
+    int turno;
+    int cant = 2;
+    int contador = 0;
+ */
+
+
     public static ArrayList<Jugador> listaOrdenadaParticipantes;
 
-
-    public void inicioJuego() {
-        ArrayList<Jugador> jugadoresParticipantes;
-
-        String stringListaordenada;
-
-        int contador = 0;
+    public void pedidoDeDatos() {
 
         /*Se pide el puntaje final del juego*/
-//        int puntajeFinal = 20;///////////////////////////////////////falta pedir el fin del juego
-        int puntajeFinal = servicio.puntajeFinal();
+        puntajeFinal = servicio.puntajeFinal();
+    }
 
-        /*Cantidad de Participantes*/
+    public void inicioJuego() {
+
+
+        // String stringListaordenada;
+
+
+
+
+        /*Se pide Cantidad de Participantes*/
         int cant = servicio.CantidadDeJugadores();
 
         /*se pide los nombres de los participantes*/
@@ -47,7 +54,7 @@ public class Juego {
         /*Muestra: nombre y turno de lo que hay en la lista*/
         servicio.vMostrar(servicio.listaStringParticipantes(jugadoresParticipantes), "Inscripción de participantes");
 
-        /*Ordenar las Listas*/
+        /*Ordenar las Listas segun el turno*/
         String getTurno = "getTurno()";
         jugadoresParticipantes.sort(Comparadores.ordenarXturno); //De mayor a menor; de acuerdo al número que sacó en el dado
         listaOrdenadaParticipantes = servicio.ordenarConsecutivosTurnos(jugadoresParticipantes);//Se setea el valor del turno correspondiente en el juego
@@ -55,31 +62,26 @@ public class Juego {
         /*
         stringListaordenada = servicio.listaStringParticipantes(listaOrdenadaParticipantes); //Se guarda en un estring todos los datos en formato tabla
         System.out.println(stringListaordenada+ "-----lo de lista ordenada-----");
-
          */
 
 
-
+        /*Muestra: la lista de nombre y turno*/
         //servicio.vMostrar("La lista ordenada por turnos queda de la siguiente manera\n" + stringListaordenada);
         servicio.vMostrar(servicio.listaStringParticipantes(listaOrdenadaParticipantes), "lista Ordenada por Turnos");
 
-
-
-         StartFrameUi starFrame = new StartFrameUi();
-          starFrame.inicioFrame();
+/* esto es la inicializacion de la parte grafica
+        StartFrameUi starFrame = new StartFrameUi();
+        starFrame.inicioFrame();
         starFrame.createGUI();
 
-         mainUI.llenarMatriz(jugadoresParticipantes);
-
-
-
+        mainUI.llenarMatriz(jugadoresParticipantes);
+ */
 
         ////muestra: nombre y turno de lo que hay en la lista
         int cont = 1;
-        for (Jugador jugador :
-                jugadoresParticipantes) {
+        for (Jugador jugador : jugadoresParticipantes) {
             //int resp = JOptionPane.showConfirmDialog(null,"Estas seguro?");//Mensaje de confirmacion YES NO Question
-            Servicio.vMostrar("EL turno n°" + cont + " le corresponde a => " + jugador.getNombre() + " que sacó en el dado el => " + jugador.getTurno(),"plapla");
+            Servicio.vMostrar("EL turno n°" + cont + " le corresponde a => " + jugador.getNombre() + " que sacó en el dado el => " + jugador.getTurno(), "plapla");
             cont++;
         }
         servicio.vMostrar("Comienza la partida. De acuerdo al turno se ira tirando de a un dado a la vez\n" +
@@ -87,6 +89,11 @@ public class Juego {
                 "Hasta que el jugador se plante\n" +
                 "Si el valor del dado es un '1' se perderá el 'Acumulado Parcial'. ", "Comienza la partida!!!");
         /////
+
+    }
+
+    public void partida() {
+
 
 ///////declaracion de la decicion del participantede plantarse o seguir
         boolean plantarse = false;
@@ -120,7 +127,7 @@ public class Juego {
                         System.out.println(listaOrdenadaParticipantes.get(i).getNombre().toUpperCase() + " saco un  uno en el dado");
                         break;
 
-                        /*Si el numero del dado es mayor a 1*/
+                        /*Si el numero del dado es distinto a 1*/
                     } else {
                         System.out.println("");
                         System.out.println("NUEVO JUGADOR " + listaOrdenadaParticipantes.get(i).getNombre());
