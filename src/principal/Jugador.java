@@ -4,7 +4,7 @@ public class Jugador {
     private String nombre;
     private Integer resultado =0;
     private int parcial;
-    private int id;
+    private Integer vInicialDado;
     private Integer turno;
 
     public Jugador() {
@@ -18,11 +18,11 @@ public class Jugador {
         this.turno = turno;
     }
 
-    public Jugador(int id, String nombre) {
+    public Jugador(int vInicialDado, String nombre) {
         this.nombre = nombre;
         this.resultado = resultado;
         this.parcial = parcial;
-        this.id = id;
+        this.vInicialDado = vInicialDado;
     }
 
     public String getNombre() {
@@ -49,12 +49,12 @@ public class Jugador {
         this.parcial = parcial;
     }
 
-    public int getId() {
-        return id;
+    public Integer getvInicialDado() {
+        return vInicialDado;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setvInicialDado(Integer vInicialDado) {
+        this.vInicialDado = vInicialDado;
     }
 
     public Integer getTurno() {

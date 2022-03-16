@@ -7,8 +7,6 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class MainUI {
     private JPanel rootPanel;
@@ -61,7 +59,7 @@ public class MainUI {
         /*pureba con lista de jugadores*/
         for (Jugador i :
                 jugador) {
-            System.out.println(i.getNombre() + ", " + i.getId() + " esto es fore de jugador nombre y id");
+            System.out.println(i.getNombre() + ", " + i.getvInicialDado() + " esto es fore de jugador nombre y id");
         }
         System.out.println("");
 
