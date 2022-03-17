@@ -50,7 +50,7 @@ public class Servicio {
                 JOptionPane.QUESTION_MESSAGE,
                 null,
                 nombresArray
-                , "automatico");
+                , "Automatico");
         if (respuetaNombres == 0) {
             return cargaAutomatica(n);
         } else {
