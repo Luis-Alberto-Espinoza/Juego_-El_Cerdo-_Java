@@ -13,7 +13,7 @@ public class Juego {
     static ArrayList<Jugador> jugadoresParticipantes;
     public static ArrayList<Jugador> listaOrdenadaParticipantes;
     Comparadores comparadores = new Comparadores();
-
+    int contadorRondas;
     /**/
     MainUI mainUI = new MainUI();
     /**/
@@ -40,7 +40,7 @@ public class Juego {
         servicio.vMostrar(servicio.listaStringParticipantes(jugadoresParticipantes), "Inscripción de participantes");
         System.out.println("Inscripción de participantes\n" + servicio.listaStringParticipantes(jugadoresParticipantes));
 
-        /*Ordenar las Listas segun el turno*/
+        /*Ordenar las Listas según el turno*/
         String getTurno = "getTurno()";
         jugadoresParticipantes.sort(Comparadores.ordenarXturno); //De mayor a menor; de acuerdo al número que sacó en el dado
         listaOrdenadaParticipantes = servicio.ordenarConsecutivosTurnos(jugadoresParticipantes);//Se setea el valor del turno correspondiente en el juego
@@ -61,12 +61,18 @@ public class Juego {
 
         ///declaracion de la decision del participantede plantarse o seguir
         boolean plantarse = false;
-         int contador = 0;
+        int contador = 0;
 
         do {
             for (int i = 0; i < jugadoresParticipantes.size(); i++) {
                 Integer total = 0;
                 listaOrdenadaParticipantes.get(i).setParcial(0);
+
+                /* contabilizamos las rondas jugadas cada vez que el primer participante juega */
+                if (i == 0){
+                    contadorRondas++ ;
+                }
+
                 if (hayGanador) {
                     break;
                 }
@@ -167,9 +173,9 @@ public class Juego {
 
         /*se muestra lista de ganadores. En formato de String*/
         servicio.vMostrar("Hay ganador  ==>  "
-                + servicio.listaStringParticipantesGanadores(listaOrdenadaParticipantes), "Hay ganador");
-        System.out.println("Hay ganador  ==>  "
-                + servicio.listaStringParticipantesGanadores(listaOrdenadaParticipantes) + "Hay ganador");
+                + servicio.listaStringParticipantesGanadores(listaOrdenadaParticipantes)+"\nSe jugaron "+contadorRondas+" rondas" , "Hay ganador");
+        System.out.println("\nHay ganador  ==>  "+ servicio.listaStringParticipantesGanadores(listaOrdenadaParticipantes)
+                +"\nSe jugaron "+contadorRondas+" rondas");
     }
 }
 
