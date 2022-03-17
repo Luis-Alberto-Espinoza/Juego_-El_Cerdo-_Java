@@ -17,9 +17,7 @@ public class Servicio {
         return (int) ((Math.random() * 6) + 1);
     }
 
-    public static int puntajeFinal() {
-        return vPedirNum("Participantes pueden decidir ¿Cual sera el puntaje final?\nRecomendacion no mas de 50");
-    }
+
 
     public static int CantidadDeJugadores() {
         String resultado;
@@ -28,10 +26,10 @@ public class Servicio {
         //   pedir la cantidad de jugadores
         do {
             if (contador > 0) {
-                resultado = vPedir(" Disculpe ingreso una opción incorrecta\nIngrese la cantidad de jugadores que párticiparan:" +
+                resultado = vPedir(" Disculpe ingresó una opción incorrecta\nIngrese la cantidad de jugadores que participarán:" +
                         "\n Hasta 6 participantes se permite en este juego");
             } else {
-                resultado = vPedir(" Ingrese la cantidad de jugadores que párticiparan:");
+                resultado = vPedir(" Ingrese la cantidad de jugadores que participarán del juego:");
             }
             contador++;
         } while (!(validadCantidadJugadores(resultado)));
@@ -46,9 +44,12 @@ public class Servicio {
 
         //Pedimos nombres...
         System.out.println("\nIntroduzca nombres.");
-        Object[] nombresArray = {"automatico", "manual"};
+        Object[] nombresArray = {"Automatico", "Manual"};
 
-        int respuetaNombres = JOptionPane.showOptionDialog(null, "carga de nombres", "Cargar los nombres de los participantes", 0, JOptionPane.QUESTION_MESSAGE, null, nombresArray
+        int respuetaNombres = JOptionPane.showOptionDialog(null, "La carga de nombres puede ser...", "Como cargar los nombres ", 0,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                nombresArray
                 , "automatico");
         if (respuetaNombres == 0) {
             return cargaAutomatica(n);
@@ -104,7 +105,7 @@ public class Servicio {
     }
 
     public static void vMostrar(String texto, String titulo) {
-        JOptionPane.showMessageDialog(null, texto, titulo, 1);
+        JOptionPane.showMessageDialog(null, texto, titulo, 0);
     }
 
     public static String vPedir(String texto) {
@@ -135,13 +136,27 @@ public class Servicio {
         String stringRetorno = "";
         for (int i = 0; i < listaOrdenadaParticipantes.size(); i++) {
             if (i == 0) {
-                stringRetorno = String.valueOf(listaOrdenadaParticipantes.get(i).getTurno()) + ", ";
+                stringRetorno =  String.valueOf(listaOrdenadaParticipantes.get(i).getNombre()) + " sacó en el dado, ";
             } else {
-                stringRetorno = stringRetorno + String.valueOf(listaOrdenadaParticipantes.get(i).getTurno() + ", ");
+                stringRetorno = stringRetorno + String.valueOf(listaOrdenadaParticipantes.get(i).getNombre()) + " sacó en el dado, ";
             }
-            stringRetorno = stringRetorno + listaOrdenadaParticipantes.get(i).getNombre() + ", ";
-            stringRetorno = stringRetorno + String.valueOf(listaOrdenadaParticipantes.get(i).getParcial()) + ", ";
-            stringRetorno = stringRetorno + String.valueOf(listaOrdenadaParticipantes.get(i).getResultado()) + ";\n";
+            stringRetorno = stringRetorno + listaOrdenadaParticipantes.get(i).getvInicialDado() + ", \n";
+//            stringRetorno = stringRetorno + String.valueOf(listaOrdenadaParticipantes.get(i).getParcial()) + ", ";
+//            stringRetorno = stringRetorno + String.valueOf(listaOrdenadaParticipantes.get(i).getResultado()) + ";\n";
+        }
+        return stringRetorno;
+    }
+    public String listaStringParticipantesOrdenada(ArrayList<Jugador> listaOrdenadaParticipantes) {
+        String stringRetorno = "";
+        for (int i = 0; i < listaOrdenadaParticipantes.size(); i++) {
+            if (i == 0) {
+                stringRetorno =  String.valueOf(listaOrdenadaParticipantes.get(i).getNombre()) + " le tocó en el dado el ";
+            } else {
+                stringRetorno = stringRetorno + String.valueOf(listaOrdenadaParticipantes.get(i).getNombre()) + " le tocó en el dado el ";
+            }
+            stringRetorno = stringRetorno + listaOrdenadaParticipantes.get(i).getvInicialDado() + " , le corresponde el turno #";
+//            stringRetorno = stringRetorno + String.valueOf(listaOrdenadaParticipantes.get(i).getParcial()) + ", ";
+            stringRetorno = stringRetorno + String.valueOf(listaOrdenadaParticipantes.get(i).getTurno()) + ";\n";
         }
         return stringRetorno;
     }
@@ -164,7 +179,8 @@ public class Servicio {
         int[] vdt = new int[jugadoresParticipantes.size()];
         vdt = vectorDeTurnos(jugadoresParticipantes.size());
         for (int i = 0; i < jugadoresParticipantes.size(); i++) {
-            jugadoresParticipantes.get(i).setTurno(vdt[i]);
+            jugadoresParticipantes.get(i).setvInicialDado(vdt[i]);
+           // System.out.println("*********"+jugadoresParticipantes.get(i).setTurno(vdt[i]));
         }
     }
 
