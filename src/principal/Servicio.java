@@ -18,7 +18,6 @@ public class Servicio {
     }
 
 
-
     public static int CantidadDeJugadores() {
         String resultado;
         int contador = 0;
@@ -44,13 +43,13 @@ public class Servicio {
 
         //Pedimos nombres...
         System.out.println("\nIntroduzca nombres.");
-        Object[] nombresArray = {"Automatico", "Manual"};
+        Object[] nombresArray = {"Automático", "Manual"};
 
         int respuetaNombres = JOptionPane.showOptionDialog(null, "La carga de nombres puede ser...", "Como cargar los nombres ", 0,
                 JOptionPane.QUESTION_MESSAGE,
                 null,
                 nombresArray
-                , "Automatico");
+                , "Automático");
         if (respuetaNombres == 0) {
             return cargaAutomatica(n);
         } else {
@@ -136,7 +135,7 @@ public class Servicio {
         String stringRetorno = "";
         for (int i = 0; i < listaOrdenadaParticipantes.size(); i++) {
             if (i == 0) {
-                stringRetorno =  String.valueOf(listaOrdenadaParticipantes.get(i).getNombre()) + " sacó en el dado, ";
+                stringRetorno = String.valueOf(listaOrdenadaParticipantes.get(i).getNombre()) + " sacó en el dado, ";
             } else {
                 stringRetorno = stringRetorno + String.valueOf(listaOrdenadaParticipantes.get(i).getNombre()) + " sacó en el dado, ";
             }
@@ -146,11 +145,12 @@ public class Servicio {
         }
         return stringRetorno;
     }
+
     public String listaStringParticipantesOrdenada(ArrayList<Jugador> listaOrdenadaParticipantes) {
         String stringRetorno = "";
         for (int i = 0; i < listaOrdenadaParticipantes.size(); i++) {
             if (i == 0) {
-                stringRetorno =  String.valueOf(listaOrdenadaParticipantes.get(i).getNombre()) + " le tocó en el dado el ";
+                stringRetorno = String.valueOf(listaOrdenadaParticipantes.get(i).getNombre()) + " le tocó en el dado el ";
             } else {
                 stringRetorno = stringRetorno + String.valueOf(listaOrdenadaParticipantes.get(i).getNombre()) + " le tocó en el dado el ";
             }
@@ -175,12 +175,36 @@ public class Servicio {
         return stringRetorno;
     }
 
+    public String listaStringContadorNegativo(ArrayList<Jugador> listaParticipantes) {
+        String stringRetorno = "";
+        for (int i = 0; i < listaParticipantes.size(); i++) {
+            if (i == 0) {
+                if (((listaParticipantes.get(i).getContadorNegaivo())) > 0) {
+
+                    stringRetorno = listaParticipantes.get(i).getNombre() + " le tocó " + String.valueOf(listaParticipantes.get(i).getContadorNegaivo() + " el UNO ") + ",\n";
+                }
+            } else {
+                if (i == 0) {
+                    if (listaParticipantes.get(i).getContadorNegaivo() > 0) {
+
+                        stringRetorno = stringRetorno + listaParticipantes.get(i).getNombre()
+                                + " le tocó " + String.valueOf(listaParticipantes.get(i).getContadorNegaivo()
+                                + " el " + "UNO ") + "," + "\n";
+                    }
+                }
+
+            }
+        }
+
+        return stringRetorno;
+    }
+
     public void sorteoDeTurnos(ArrayList<Jugador> jugadoresParticipantes) {
         int[] vdt = new int[jugadoresParticipantes.size()];
         vdt = vectorDeTurnos(jugadoresParticipantes.size());
         for (int i = 0; i < jugadoresParticipantes.size(); i++) {
             jugadoresParticipantes.get(i).setvInicialDado(vdt[i]);
-           // System.out.println("*********"+jugadoresParticipantes.get(i).setTurno(vdt[i]));
+            // System.out.println("*********"+jugadoresParticipantes.get(i).setTurno(vdt[i]));
         }
     }
 

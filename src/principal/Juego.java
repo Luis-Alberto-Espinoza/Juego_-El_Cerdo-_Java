@@ -69,8 +69,8 @@ public class Juego {
                 listaOrdenadaParticipantes.get(i).setParcial(0);
 
                 /* contabilizamos las rondas jugadas cada vez que el primer participante juega */
-                if (i == 0){
-                    contadorRondas++ ;
+                if (i == 0) {
+                    contadorRondas++;
                 }
 
                 if (hayGanador) {
@@ -89,6 +89,9 @@ public class Juego {
                         /*se setea el acumulado parcial a cero*/
                         jugadoresParticipantes.get(i).setParcial(0);
 
+                        /*se setea el atributo contador negativo -- trayendo lo que tiene ese atributo y se le suma uno*/
+                        jugadoresParticipantes.get(i).setContadorNegaivo(jugadoresParticipantes.get(i).getContadorNegaivo() + 1);
+
                         /*Muestra el mesaje x JOPane*/
                         servicio.vMostrar(listaOrdenadaParticipantes.get(i).getNombre().toUpperCase() +
                                 "\nEl dado marcó UNO (1) no se suma en esta ronda, \nContinua el siguiente jugador", "Que mala suerte");
@@ -97,9 +100,9 @@ public class Juego {
                         System.out.println(listaOrdenadaParticipantes.get(i).getNombre().toUpperCase() + " saco un uno en el dado");
                         break;
 
-                        /*Si el numero del dado es distinto a 1*/
+                        /*Si el número del dado es distinto a 1*/
                     } else {
-                        /*muestra el cartel de: el turno, el nombre en mayusculas, y lo que devuelve la tirada de dados */
+                        /*muestra el cartel de: el turno, el nombre en mayúsculas, y lo que devuelve la tirada de dados */
                         servicio.vMostrar("El participante #" + listaOrdenadaParticipantes.get(i).getTurno() + " ==> " + listaOrdenadaParticipantes.get(i).getNombre().toUpperCase()
                                 + " \nObtuvo en el dado, el número => " + jugada, "Tirada de Dados");
 
@@ -113,8 +116,7 @@ public class Juego {
                         System.out.println(listaOrdenadaParticipantes.get(i).getParcial() + jugada + "=== parcial + jugada");
                          */
 
-                        /* SE MUESTRA EL RESULTADO PARCIAL DE LA ULTIMA TIRADA DE DADOS DEL JUGADOR EN CURSO
-                         *  */
+                        /* SE MUESTRA EL RESULTADO PARCIAL DE LA ULTIMA TIRADA DE DADOS DEL JUGADOR EN CURSO */
                         servicio.vMostrar("NUEVO JUGADOR " + listaOrdenadaParticipantes.get(i).getNombre() + "\n" +
                                 listaOrdenadaParticipantes.get(i).getParcial() + "=== el acumulado del turno es: \n" +
                                 listaOrdenadaParticipantes.get(i).getResultado() + "=== acumulado de las rondas anteriores\n" +
@@ -147,7 +149,6 @@ public class Juego {
                                 JOptionPane.QUESTION_MESSAGE, null, arreglo, "Continuar");
                         if ((0 == resp)) {
                             plantarse = true;
-                            //listaOrdenadaParticipantes.get(i).setResultado(listaOrdenadaParticipantes.get(i).getParcial());
                             break;
                         }
                         if (hayGanador) {
@@ -165,17 +166,27 @@ public class Juego {
             }
         } while (!hayGanador);//si hay ganador se termina el juego
 
+        /*Se ordena la lista de los participantes de acuerdo a su contador negativo */
+        listaOrdenadaParticipantes.sort(Comparadores.ordenarXmalaSuerte); //De mayor a menor
+        String malaSuerte = servicio.listaStringContadorNegativo(listaOrdenadaParticipantes);
+
+
+
         /*Se ordena la lista de los participantes de acuerdo a su puntaje final */
         listaOrdenadaParticipantes.sort(Comparadores.ordenarXpuntajetotal); //De mayor a menor
+
+
 
         /*Modificar columna turno por podio*/
         servicio.turnoXpodio(listaOrdenadaParticipantes);
 
-        /*se muestra lista de ganadores. En formato de String*/
-        servicio.vMostrar("Hay ganador  ==>  "
-                + servicio.listaStringParticipantesGanadores(listaOrdenadaParticipantes)+"\nSe jugaron "+contadorRondas+" rondas" , "Hay ganador");
-        System.out.println("\nHay ganador  ==>  "+ servicio.listaStringParticipantesGanadores(listaOrdenadaParticipantes)
-                +"\nSe jugaron "+contadorRondas+" rondas");
+        /*se muestra lista de ganadores. En formato de String por jop y por consola */
+        servicio.vMostrar("Hay ganador  ==>  "+ servicio.listaStringParticipantesGanadores(listaOrdenadaParticipantes)
+                + "\nSe jugaron " + contadorRondas + " rondas"+malaSuerte, "Hay ganador");
+
+        System.out.println("\nHay ganador  ==>  " + servicio.listaStringParticipantesGanadores(listaOrdenadaParticipantes)
+                + "\nSe jugaron " + contadorRondas + " rondas"
+                + "\nlos que más mala suerte tuvieron son " + malaSuerte);
     }
 }
 
