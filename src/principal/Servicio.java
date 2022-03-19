@@ -42,6 +42,7 @@ public class Servicio {
         tablaPuntuaciones = new int[n][5];
 
         //Pedimos nombres...
+        /*
         System.out.println("\nIntroduzca nombres.");
         Object[] nombresArray = {"Automático", "Manual"};
 
@@ -55,7 +56,8 @@ public class Servicio {
         } else {
             return cargaManual(n);
         }
-
+*/
+        return cargaAutomatica(n);
     }
 
     private ArrayList<Jugador> cargaManual(int n) {
@@ -113,6 +115,40 @@ public class Servicio {
 
     public static int vPedirNum(String texto) {
         return Integer.parseInt(JOptionPane.showInputDialog(null, texto));
+    }
+
+
+    /*Mensaje jugada por participante*/
+    public String mensajeXjugada(ArrayList<Jugador> participante, int i, int jugada) {
+        String mensaje = "";
+        if (participante.get(i).getResultado() == 0 & participante.get(i).getParcial() == 0) {
+            mensaje = ("JUGADOR=> " + participante.get(i).getNombre()
+                    + "\nTira el dado y obtiene un => " + jugada
+                    + "\nSi se planta ahora, el total sería => " + (participante.get(i).getResultado() + participante.get(i).getParcial() + jugada) + "\n");
+
+        } else if (participante.get(i).getParcial() == 0 & participante.get(i).getResultado() > 0) {
+            mensaje = ("JUGADOR=> " + participante.get(i).getNombre()
+                    + "\nTira el dado y obtiene un => " + jugada
+                    + "\nEl acumulado de rondas anteriores es => " + participante.get(i).getResultado()
+                    + "\nSi se planta ahora, el total sería => " + (participante.get(i).getResultado() + participante.get(i).getParcial() + jugada) + "\n");
+
+        } else if (participante.get(i).getParcial() > 0 & participante.get(i).getResultado() == 0) {
+            mensaje = ("JUGADOR=> " + participante.get(i).getNombre()
+                    + "\nTira el dado y obtiene un => " + jugada
+                    + "\nEl anterior parcial es => " + participante.get(i).getParcial()
+                    + "\nEl nuevo parcial es => " + (participante.get(i).getParcial() + jugada)
+                    + "\nSi se planta ahora, el total sería => " + (participante.get(i).getResultado() + participante.get(i).getParcial() + jugada) + "\n");
+
+        } else {
+            mensaje = ("JUGADOR=> " + participante.get(i).getNombre()
+                    + "\nTira el dado y obtiene un => " + jugada
+                    + "\nEl anterior parcial es => " + participante.get(i).getParcial()
+                    + "\nEl nuevo parcial es => " + (participante.get(i).getParcial() + jugada)
+                    + "\nEl acumulado de rondas anteriores es => " + participante.get(i).getResultado()
+                    + "\nSi se planta ahora, el total sería => " + (participante.get(i).getResultado() + participante.get(i).getParcial() + jugada) + "\n");
+        }
+
+        return mensaje;
     }
 
     public boolean validarNombre(String datos) {
@@ -176,26 +212,39 @@ public class Servicio {
     }
 
     public String listaStringContadorNegativo(ArrayList<Jugador> listaParticipantes) {
-        String stringRetorno = "";
+
+        String stringRetorno = "\n";
+        int contador = 0;
         for (int i = 0; i < listaParticipantes.size(); i++) {
-            if (i == 0) {
-                if (((listaParticipantes.get(i).getContadorNegaivo())) > 0) {
-
-                    stringRetorno = listaParticipantes.get(i).getNombre() + " le tocó " + String.valueOf(listaParticipantes.get(i).getContadorNegaivo() + " el UNO ") + ",\n";
-                }
-            } else {
-                if (i == 0) {
-                    if (listaParticipantes.get(i).getContadorNegaivo() > 0) {
-
-                        stringRetorno = stringRetorno + listaParticipantes.get(i).getNombre()
-                                + " le tocó " + String.valueOf(listaParticipantes.get(i).getContadorNegaivo()
-                                + " el " + "UNO ") + "," + "\n";
-                    }
-                }
-
+            if (listaParticipantes.get(i).getContadorNegaivo() > 0) {
+                contador++;
             }
         }
-
+        for (int i = 0; i < listaParticipantes.size(); i++) {
+            if (listaParticipantes.get(i).getContadorNegaivo() > 0) {
+                if (contador == 1) {
+                    if (listaParticipantes.get(i).getContadorNegaivo() == 1) {
+                        stringRetorno += "El jugador que tuvo más mala suerte fué: " + (listaParticipantes.get(i).getNombre() + " que obtuvo #") +
+                                (listaParticipantes.get(i).getContadorNegaivo() + " ves el uno en el dado");
+                    } else {
+                        stringRetorno += "El jugador que tuvo más mala suerte fué: " + (listaParticipantes.get(i).getNombre() + " que obtuvo #") +
+                                (listaParticipantes.get(i).getContadorNegaivo() + " veces el uno en el dado");
+                    }
+                } else if (contador > 2) {
+                    if (i == 0) {
+                        stringRetorno += "Los jugadores que tuvieron más mala suerte fueron: \n" + (listaParticipantes.get(i).getNombre() + " que obtuvo #") +
+                                (listaParticipantes.get(i).getContadorNegaivo() + " veces el uno en el dado \n");
+                    }
+                    if (i > 0) {
+                        stringRetorno += (listaParticipantes.get(i).getNombre() + " que obtuvo #") +
+                                (listaParticipantes.get(i).getContadorNegaivo() + " veces el uno en el dado \n");
+                    }
+                }
+            }
+        }
+        if (contador == 0) {
+            stringRetorno += "Que suerte a ningún participante le tocó el UNO en el dado";
+        }
         return stringRetorno;
     }
 
