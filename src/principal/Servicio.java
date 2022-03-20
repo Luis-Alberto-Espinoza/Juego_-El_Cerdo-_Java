@@ -11,12 +11,11 @@ public class Servicio {
     static String[] jugadores;
     static int[][] tablaPuntuaciones;
     int n;
-//metodo aleatorio entere 1 y 6
 
+    //metodo aleatorio entere 1 y 6
     public int random() {
         return (int) ((Math.random() * 6) + 1);
     }
-
 
     public static int CantidadDeJugadores() {
         String resultado;
@@ -33,6 +32,11 @@ public class Servicio {
             contador++;
         } while (!(validadCantidadJugadores(resultado)));
         return Integer.parseInt(resultado);
+    }
+
+    public static boolean validadCantidadJugadores(String datos) {
+
+        return datos.matches("[1-6]");
     }
 
     public ArrayList<Jugador> pedirNombre(int n) {
@@ -82,17 +86,14 @@ public class Servicio {
         return participantes;
     }
 
-
     private ArrayList<Jugador> cargaAutomatica(int n) {
         String nombre;
         ArrayList<Jugador> participantes = new ArrayList();
-        String[] nombreAleatorio = {"alberto", "espinoza", "morales", "micielli", "moron"};
         for (int i = 0; i < n; i++) {
             participantes.add(new Jugador(boot()[i].toUpperCase()));
         }
         return participantes;
     }
-
 
     public static String[] boot() {
         String[] boots = new String[6];
@@ -117,8 +118,6 @@ public class Servicio {
         return Integer.parseInt(JOptionPane.showInputDialog(null, texto));
     }
 
-
-    /*Mensaje jugada por participante*/
     public String mensajeXjugada(ArrayList<Jugador> participante, int i, int jugada) {
         String mensaje = "";
         if (participante.get(i).getResultado() == 0 & participante.get(i).getParcial() == 0) {
@@ -147,17 +146,11 @@ public class Servicio {
                     + "\nEl acumulado de rondas anteriores es => " + participante.get(i).getResultado()
                     + "\nSi se planta ahora, el total sería => " + (participante.get(i).getResultado() + participante.get(i).getParcial() + jugada) + "\n");
         }
-
         return mensaje;
     }
 
     public boolean validarNombre(String datos) {
         return datos.matches("[a-zA-Z]*");
-    }
-
-    public static boolean validadCantidadJugadores(String datos) {
-
-        return datos.matches("[1-6]");
     }
 
     public ArrayList<Jugador> ordenarConsecutivosTurnos(ArrayList<Jugador> jugadoresParticipantes) {
@@ -201,12 +194,12 @@ public class Servicio {
         String stringRetorno = "";
         for (int i = 0; i < listaOrdenadaParticipantes.size(); i++) {
             if (i == 0) {
-                stringRetorno = String.valueOf(listaOrdenadaParticipantes.get(i).getTurno()) + ", ";
+                stringRetorno = "EL PUESTO " + String.valueOf(listaOrdenadaParticipantes.get(i).getTurno()) + " es para, ";
             } else {
-                stringRetorno = stringRetorno + String.valueOf(listaOrdenadaParticipantes.get(i).getTurno() + ", ");
+                stringRetorno += "EL PUESTO " + String.valueOf(listaOrdenadaParticipantes.get(i).getTurno()) + " es para, ";
             }
-            stringRetorno = stringRetorno + listaOrdenadaParticipantes.get(i).getNombre() + ", ";
-            stringRetorno = stringRetorno + String.valueOf(listaOrdenadaParticipantes.get(i).getResultado()) + ";\n";
+            stringRetorno += listaOrdenadaParticipantes.get(i).getNombre() + ", ";
+            stringRetorno += " con " + String.valueOf(listaOrdenadaParticipantes.get(i).getResultado()) + " puntos ;\n";
         }
         return stringRetorno;
     }
@@ -281,14 +274,33 @@ public class Servicio {
         }
     }
 
-
-//    public boolean comprobarGanador(ArrayList<Jugador> listaOrdenadaParticipantes) {
-//        if (jugadoresParticipantes.get(i).getResultado() >= 20) {
-//            System.out.println("HAY UN GANADOR!!!!");
-//            System.out.println("el ganador es " + jugadoresParticipantes.get(i).getNombre());
-//            hayGanador = true;
-//            break;
-//
-//        }
-//    }
+    public int validaPuntajeFinal() {
+        Integer puntajeFinal = 0;
+        String entrada = "";
+        int contador = 0;
+        boolean validado = false;
+        boolean isNumeric = false;
+        do {
+            contador = 0;
+            do {
+                if (contador == 0) {
+                    entrada = vPedir("Participantes pueden decidir ¿Cuál será el puntaje final?" +
+                            "\nRecomendación entre 7 y 50 \n");
+                } else {
+                    entrada = vPedir("Disculpe su ingreso no fue un número!!! \n Ingrese el puntaje final \n\n");
+                }
+                isNumeric = entrada.matches("[+-]?\\d*(\\.\\d+)?");
+                contador++;
+            } while (!isNumeric);
+            puntajeFinal = Integer.parseInt(entrada);
+            if (puntajeFinal < 7) {
+                vMostrar("Disculpe su ingreso fué un número menor a 7!!! " +
+                        "\n Ingrese el puntaje final \n ", "ERROR !!!!");
+            }
+            if (puntajeFinal > 6) {
+                validado = true;
+            }
+        } while (!validado);
+        return puntajeFinal;
+    }
 }

@@ -21,13 +21,11 @@ public class Juego {
     public void pedidoDeDatos() {
 
         /*Se pide el puntaje final del juego*/
-        // puntajeFinal = servicio.vPedirNum("Participantes pueden decidir ¿Cuál será el puntaje final?\nRecomendación no más de 50");
-        puntajeFinal = 155;
-
+        puntajeFinal = servicio.validaPuntajeFinal();
 
         /*Se pide Cantidad de Participantes*/
-        //int cant = servicio.CantidadDeJugadores();
-        int cant = 3;
+        int cant = servicio.CantidadDeJugadores();
+        //int cant = 3;
 
         /*se pide los nombres de los participantes*/
         jugadoresParticipantes = servicio.pedirNombre(cant);
@@ -41,7 +39,7 @@ public class Juego {
 
         /*Muestra: nombre y turno de lo que hay en la lista*/
         //servicio.vMostrar(servicio.listaStringParticipantes(jugadoresParticipantes), "Inscripción de participantes");
-        System.out.println("Inscripción de participantes\n" + servicio.listaStringParticipantes(jugadoresParticipantes));
+        System.out.println("Inscripción de participantes\n" +servicio.listaStringParticipantes(jugadoresParticipantes));
 
         /*Ordenar las Listas según el turno*/
         String getTurno = "getTurno()";
@@ -49,7 +47,7 @@ public class Juego {
         listaOrdenadaParticipantes = servicio.ordenarConsecutivosTurnos(jugadoresParticipantes);//Se setea el valor del turno correspondiente en el juego
 
         /*Muestra: la lista de nombres ordenada por su turno correspondiente */
-        // servicio.vMostrar(servicio.listaStringParticipantesOrdenada(listaOrdenadaParticipantes), "Lista ordenada por turnos");
+         servicio.vMostrar(servicio.listaStringParticipantesOrdenada(listaOrdenadaParticipantes), "Lista ordenada por turnos");
         System.out.println("lista Ordenada por Turnos\n" + servicio.listaStringParticipantesOrdenada(listaOrdenadaParticipantes));
 
         /* Mostrar las reglas basicas del juego */
@@ -111,18 +109,8 @@ public class Juego {
                         System.out.println(tablaXpartida);
 
                         /*muestra el cartel de: el turno, el nombre en mayúsculas, y lo que devuelve la tirada de dados */
-                   //     servicio.vMostrar(tablaXpartida, "Tirada de Dados");
-
-
-
-
-                        /* SE MUESTRA EL RESULTADO PARCIAL DE LA ULTIMA TIRADA DE DADOS DEL JUGADOR EN CURSO */
-//                        servicio.vMostrar("NUEVO JUGADOR " + listaOrdenadaParticipantes.get(i).getNombre() + "\n" +
-//                                listaOrdenadaParticipantes.get(i).getParcial() + "=== el acumulado del turno es: \n" +
-//                                listaOrdenadaParticipantes.get(i).getResultado() + "=== acumulado de las rondas anteriores\n" +
-//                                "el obtenido en la jugada " + jugada + "\n" +
-//                                (listaOrdenadaParticipantes.get(i).getParcial() + jugada) + "=== acumulado + jugada", "RESULTADO PARCIAL");
-
+                        servicio.vMostrar(tablaXpartida, "Turno de :"+listaOrdenadaParticipantes.get(i).getNombre()
+                                +", esta es la ronda #"+contadorRondas);
 
                         /*Se setea el parcial = parcial + nueva jugada*/
                         listaOrdenadaParticipantes.get(i).setParcial(listaOrdenadaParticipantes.get(i).getParcial() + jugada);
@@ -130,7 +118,6 @@ public class Juego {
                         /*se guarda en variables locales lo que trae el parcial y el total*/
                         nuevoParcial = listaOrdenadaParticipantes.get(i).getParcial();
                         total = listaOrdenadaParticipantes.get(i).getResultado();
-
 
                         /*Si el total + parcial superan o igualan la constante puntaje final. entonces hay Ganador*/
                         if ((nuevoParcial + total) >= puntajeFinal) {
@@ -142,18 +129,17 @@ public class Juego {
                         /*Se consulta si desea plantarse o continuar*/
                         int resp;
                         String[] arreglo = {"Plantarse", "Continuar"};
-//                        resp = JOptionPane.showOptionDialog(null, "¿Deseas continuar?",
-//                                listaOrdenadaParticipantes.get(i).getNombre(), 0,
-//                                //  JOptionPane.QUESTION_MESSAGE, null, arreglo, "Continuar");
-//                                JOptionPane.QUESTION_MESSAGE, null, arreglo, null);
-                        resp = 0;
+                        resp = JOptionPane.showOptionDialog(null, "¿Deseas continuar?",
+                                listaOrdenadaParticipantes.get(i).getNombre(), 0,
+                                //  JOptionPane.QUESTION_MESSAGE, null, arreglo, "Continuar");
+                                JOptionPane.QUESTION_MESSAGE, null, arreglo, null);
+                       // resp = 0;
                         if ((0 == resp)) {
                             plantarse = true;
                             break;
                         }
                         if (hayGanador) {
                             break;
-
                         }
                     }
                 } while (!(plantarse));//se repite hasta que desee plantarse
@@ -161,8 +147,6 @@ public class Juego {
                 /*Se setea el resultado= con el resultado + el acumulado de la ultima jugada*/
                 listaOrdenadaParticipantes.get(i).setResultado(listaOrdenadaParticipantes.get(i).getResultado()
                         + listaOrdenadaParticipantes.get(i).getParcial());
-                //mainUI.llenarMatriz(jugadoresParticipantes);
-
             }
         } while (!hayGanador);//si hay ganador se termina el juego
 
@@ -170,23 +154,21 @@ public class Juego {
         listaOrdenadaParticipantes.sort(Comparadores.ordenarXmalaSuerte); //De mayor a menor
         String malaSuerte = servicio.listaStringContadorNegativo(listaOrdenadaParticipantes);
 
-
-
         /*Se ordena la lista de los participantes de acuerdo a su puntaje final */
         listaOrdenadaParticipantes.sort(Comparadores.ordenarXpuntajetotal); //De mayor a menor
-
-
 
         /*Modificar columna turno por podio*/
         servicio.turnoXpodio(listaOrdenadaParticipantes);
 
         /*se muestra lista de ganadores. En formato de String por jop y por consola */
-//        servicio.vMostrar("Hay ganador  ==>  "+ servicio.listaStringParticipantesGanadores(listaOrdenadaParticipantes)
-//                + "\nSe jugaron " + contadorRondas + " rondas\n"+malaSuerte, "Hay ganador");
+        servicio.vMostrar("         ¡¡¡Hay Ganador!!!\n  ==>  "
+                + servicio.listaStringParticipantesGanadores(listaOrdenadaParticipantes)
+                + "\nSe jugaron " + contadorRondas + " rondas\n"+malaSuerte, "¡¡¡HAY GANADOR!!!");
 
-        System.out.println("\nHay ganador  ==>  " + servicio.listaStringParticipantesGanadores(listaOrdenadaParticipantes)
+        System.out.println("\n          ¡¡¡Hay Ganador!!!\n ==>  "
+                +servicio.listaStringParticipantesGanadores(listaOrdenadaParticipantes)
                 + "\nSe jugaron " + contadorRondas + " rondas"
-                + "\n" + malaSuerte);
+                + "\n" + malaSuerte+ "\n");
     }
 }
 
