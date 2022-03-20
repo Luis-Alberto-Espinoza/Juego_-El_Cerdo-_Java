@@ -6,6 +6,17 @@ public class Jugador {
     private int parcial;
     private Integer vInicialDado;
     private Integer turno;
+    private Integer contadorNegaivo = 0;
+
+    public Integer getContadorNegaivo() {
+        return contadorNegaivo;
+    }
+
+    public void setContadorNegaivo(Integer contadorNegaivo) {
+        this.contadorNegaivo = contadorNegaivo;
+    }
+
+
 
     public Jugador() {
     }

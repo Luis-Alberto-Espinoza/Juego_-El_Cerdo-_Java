@@ -19,5 +19,11 @@ public class Comparadores {
         }
     };
 
+    public static Comparator<Jugador> ordenarXmalaSuerte = new Comparator<Jugador>() {
+        @Override
+        public int compare(Jugador o1, Jugador o2) {
+            return o2.getContadorNegaivo().compareTo(o1.getContadorNegaivo());
+        }
+    };
 
 }
