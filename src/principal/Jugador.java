@@ -16,8 +16,6 @@ public class Jugador {
         this.contadorNegaivo = contadorNegaivo;
     }
 
-
-
     public Jugador() {
     }
 
