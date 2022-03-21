@@ -80,7 +80,7 @@ public class Servicio {
             } while (!(validarNombre(nombre)));
             contadorErrores = 0;
             contador++;
-            participantes.add(new Jugador(nombre));
+            participantes.add(new Jugador(nombre.toUpperCase()));
         }
         return participantes;
     }
