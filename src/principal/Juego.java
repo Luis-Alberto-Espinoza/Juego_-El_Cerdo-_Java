@@ -1,8 +1,5 @@
 package principal;
 
-import segundointentoventana.StartFrameUi;
-import segundointentoventana.ui.MainUI;
-
 import javax.swing.*;
 import java.util.ArrayList;
 
@@ -14,9 +11,7 @@ public class Juego {
     public static ArrayList<Jugador> listaOrdenadaParticipantes;
     Comparadores comparadores = new Comparadores();
     int contadorRondas;
-    /**/
-    MainUI mainUI = new MainUI();
-    /**/
+
 
     public void pedidoDeDatos() {
 
@@ -34,11 +29,11 @@ public class Juego {
     public void inicioJuego() {
 
         /*Sorteo de Turnos*/
-        // servicio.vMostrar("Tiramos los dados para cada jugador, así determinamos el orden de turnos", "ATENCIÓN!!!");
+         servicio.vMostrar("Tiramos los dados para cada jugador, así determinamos el orden de turnos", "ATENCIÓN!!!");
         servicio.sorteoDeTurnos(jugadoresParticipantes);
 
         /*Muestra: nombre y turno de lo que hay en la lista*/
-        //servicio.vMostrar(servicio.listaStringParticipantes(jugadoresParticipantes), "Inscripción de participantes");
+        servicio.vMostrar(servicio.listaStringParticipantes(jugadoresParticipantes), "Inscripción de participantes");
         System.out.println("Inscripción de participantes\n" +servicio.listaStringParticipantes(jugadoresParticipantes));
 
         /*Ordenar las Listas según el turno*/
@@ -51,16 +46,15 @@ public class Juego {
         System.out.println("lista Ordenada por Turnos\n" + servicio.listaStringParticipantesOrdenada(listaOrdenadaParticipantes));
 
         /* Mostrar las reglas basicas del juego */
-//        servicio.vMostrar("Comienza la partida. De acuerdo al turno se ira tirando de a un dado a la vez\n" +
-//                "El puntaje que salga se ira almacenando en 'Puntaje Parcial'.\n" +
-//                "Hasta que el jugador se plante\n" +
-//                "Si el valor del dado es un '1' se perderá el 'Acumulado Parcial'. ", "Comienza la partida!!!");
+        servicio.vMostrar("Comienza la partida. De acuerdo al turno se ira tirando de a un dado a la vez\n" +
+                "El puntaje que salga se ira almacenando en 'Puntaje Parcial'.\n" +
+                "Hasta que el jugador se plante\n" +
+                "Si el valor del dado es un '1' se perderá el 'Acumulado Parcial'. ", "Comienza la partida!!!");
     }
 
     /* !!!COMIENZA LA PARTIDA!!!!! */
     public void partida() {
         String tablaXpartida;
-        ///declaracion de la decision del participantede plantarse o seguir
         boolean plantarse = false;
         int contador = 0;
 
@@ -95,8 +89,8 @@ public class Juego {
                         jugadoresParticipantes.get(i).setContadorNegaivo(jugadoresParticipantes.get(i).getContadorNegaivo() + 1);
 
                         /*Muestra el mesaje x JOPane*/
-//                        servicio.vMostrar(listaOrdenadaParticipantes.get(i).getNombre().toUpperCase() +
-//                                "\nEl dado marcó UNO (1) no se suma en esta ronda, \nContinua el siguiente jugador", "Que mala suerte");
+                        servicio.vMostrar(listaOrdenadaParticipantes.get(i).getNombre().toUpperCase() +
+                                "\nEl dado marcó UNO (1) no se suma en esta ronda, \nContinua el siguiente jugador", "Que mala suerte");
                         /*Muestra el mesaje x consola*/
                          System.out.println(listaOrdenadaParticipantes.get(i).getNombre().toUpperCase() + " saco un uno en el dado!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
                         break;
@@ -131,7 +125,6 @@ public class Juego {
                         String[] arreglo = {"Plantarse", "Continuar"};
                         resp = JOptionPane.showOptionDialog(null, "¿Deseas continuar?",
                                 listaOrdenadaParticipantes.get(i).getNombre(), 0,
-                                //  JOptionPane.QUESTION_MESSAGE, null, arreglo, "Continuar");
                                 JOptionPane.QUESTION_MESSAGE, null, arreglo, null);
                        // resp = 0;
                         if ((0 == resp)) {
