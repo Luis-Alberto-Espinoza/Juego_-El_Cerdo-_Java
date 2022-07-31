@@ -2,8 +2,6 @@ package principal;
 
 import javax.swing.*;
 import java.util.ArrayList;
-import java.util.Locale;
-import java.util.Random;
 import java.util.Scanner;
 
 public class Servicio {
@@ -51,10 +49,7 @@ public class Servicio {
         Object[] nombresArray = {"Automático", "Manual"};
 
         int respuetaNombres = JOptionPane.showOptionDialog(null, "La carga de nombres puede ser...", "Como cargar los nombres ", 0,
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                nombresArray
-                , "Automático");
+                JOptionPane.QUESTION_MESSAGE,null, nombresArray, "Automático");
         if (respuetaNombres == 0) {
             return cargaAutomatica(n);
         } else {
@@ -96,12 +91,12 @@ public class Servicio {
 
     public static String[] boot() {
         String[] boots = new String[6];
-        boots[0] = "luis";
-        boots[1] = "alberto";
-        boots[2] = "espinoza";
-        boots[3] = "morales";
-        boots[4] = "natalia";
-        boots[5] = "malena";
+        boots[0] = "ANA";
+        boots[1] = "Beatriz";
+        boots[2] = "carLos";
+        boots[3] = "Diego";
+        boots[4] = "emilianO";
+        boots[5] = "fRanco";
         return boots;
     }
 
@@ -220,7 +215,7 @@ public class Servicio {
                         stringRetorno += "El jugador que tuvo más mala suerte fué: " + (listaParticipantes.get(i).getNombre() + " que obtuvo #") +
                                 (listaParticipantes.get(i).getContadorNegaivo() + " veces el uno en el dado");
                     }
-                } else if (contador > 2) {
+                } else if (contador > 1) {
                     if (i == 0) {
                         stringRetorno += "Los jugadores que tuvieron más mala suerte fueron: \n" + (listaParticipantes.get(i).getNombre() + " que obtuvo #") +
                                 (listaParticipantes.get(i).getContadorNegaivo() + " veces el uno en el dado \n");
@@ -298,5 +293,12 @@ public class Servicio {
             }
         } while (!validado);
         return puntajeFinal;
+    }
+    public  int jugarOtraVez(){
+        String respuesta = "";
+        int res;
+        res = JOptionPane.showConfirmDialog(null, "¿Quieren seguir jugando?","¿Quieren volver jugar?",JOptionPane.YES_NO_OPTION );
+        System.out.println(">>>>>>> respuesta <<<<<<< >>>>>>> " +res);
+        return res;
     }
 }

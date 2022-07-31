@@ -29,12 +29,12 @@ public class Juego {
     public void inicioJuego() {
 
         /*Sorteo de Turnos*/
-         servicio.vMostrar("Tiramos los dados para cada jugador, así determinamos el orden de turnos", "ATENCIÓN!!!");
+        servicio.vMostrar("Tiramos los dados para cada jugador, así determinamos el orden de turnos", "ATENCIÓN!!!");
         servicio.sorteoDeTurnos(jugadoresParticipantes);
 
         /*Muestra: nombre y turno de lo que hay en la lista*/
         servicio.vMostrar(servicio.listaStringParticipantes(jugadoresParticipantes), "Inscripción de participantes");
-        System.out.println("Inscripción de participantes\n" +servicio.listaStringParticipantes(jugadoresParticipantes));
+        System.out.println("Inscripción de participantes\n" + servicio.listaStringParticipantes(jugadoresParticipantes));
 
         /*Ordenar las Listas según el turno*/
         String getTurno = "getTurno()";
@@ -42,7 +42,7 @@ public class Juego {
         listaOrdenadaParticipantes = servicio.ordenarConsecutivosTurnos(jugadoresParticipantes);//Se setea el valor del turno correspondiente en el juego
 
         /*Muestra: la lista de nombres ordenada por su turno correspondiente */
-         servicio.vMostrar(servicio.listaStringParticipantesOrdenada(listaOrdenadaParticipantes), "Lista ordenada por turnos");
+        servicio.vMostrar(servicio.listaStringParticipantesOrdenada(listaOrdenadaParticipantes), "Lista ordenada por turnos");
         System.out.println("lista Ordenada por Turnos\n" + servicio.listaStringParticipantesOrdenada(listaOrdenadaParticipantes));
 
         /* Mostrar las reglas basicas del juego */
@@ -92,7 +92,7 @@ public class Juego {
                         servicio.vMostrar(listaOrdenadaParticipantes.get(i).getNombre().toUpperCase() +
                                 "\nEl dado marcó UNO (1) no se suma en esta ronda, \nContinua el siguiente jugador", "Que mala suerte");
                         /*Muestra el mesaje x consola*/
-                         System.out.println(listaOrdenadaParticipantes.get(i).getNombre().toUpperCase() + " saco un uno en el dado!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
+                        System.out.println(listaOrdenadaParticipantes.get(i).getNombre().toUpperCase() + " saco un uno en el dado!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
                         break;
 
                         /*Si el número del dado es distinto a 1*/
@@ -103,8 +103,8 @@ public class Juego {
                         System.out.println(tablaXpartida);
 
                         /*muestra el cartel de: el turno, el nombre en mayúsculas, y lo que devuelve la tirada de dados */
-                        servicio.vMostrar(tablaXpartida, "Turno de :"+listaOrdenadaParticipantes.get(i).getNombre()
-                                +", esta es la ronda #"+contadorRondas);
+                        servicio.vMostrar(tablaXpartida, "Turno de :" + listaOrdenadaParticipantes.get(i).getNombre()
+                                + ", esta es la ronda #" + contadorRondas);
 
                         /*Se setea el parcial = parcial + nueva jugada*/
                         listaOrdenadaParticipantes.get(i).setParcial(listaOrdenadaParticipantes.get(i).getParcial() + jugada);
@@ -126,7 +126,7 @@ public class Juego {
                         resp = JOptionPane.showOptionDialog(null, "¿Deseas continuar?",
                                 listaOrdenadaParticipantes.get(i).getNombre(), 0,
                                 JOptionPane.QUESTION_MESSAGE, null, arreglo, null);
-                       // resp = 0;
+                        // resp = 0;
                         if ((0 == resp)) {
                             plantarse = true;
                             break;
@@ -156,12 +156,17 @@ public class Juego {
         /*se muestra lista de ganadores. En formato de String por jop y por consola */
         servicio.vMostrar("         ¡¡¡Hay Ganador!!!\n  ==>  "
                 + servicio.listaStringParticipantesGanadores(listaOrdenadaParticipantes)
-                + "\nSe jugaron " + contadorRondas + " rondas\n"+malaSuerte, "¡¡¡HAY GANADOR!!!");
+                + "\nSe jugaron " + contadorRondas + " rondas\n" + malaSuerte, "¡¡¡HAY GANADOR!!!");
 
         System.out.println("\n          ¡¡¡Hay Ganador!!!\n ==>  "
-                +servicio.listaStringParticipantesGanadores(listaOrdenadaParticipantes)
+                + servicio.listaStringParticipantesGanadores(listaOrdenadaParticipantes)
                 + "\nSe jugaron " + contadorRondas + " rondas"
-                + "\n" + malaSuerte+ "\n");
+                + "\n" + malaSuerte + "\n");
+    }
+    public  int jugarNuevamente(){
+
+        int resul = servicio.jugarOtraVez();
+        return resul;
     }
 }
 
